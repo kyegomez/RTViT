@@ -380,7 +380,7 @@ This project provides a **real-time, continuously training vision model** that l
 
    ```bash
    git clone https://github.com/kyegomez/RTViT
-   cd real-time-vision-training
+   cd RTViT
    ```
 
 2. **Create a Virtual Environment** (Optional but recommended):
@@ -470,8 +470,8 @@ We welcome contributions from the community to make this project better!
 2. **Clone Your Fork**:
 
    ```bash
-   git clone https://github.com/your-username/real-time-vision-training.git
-   cd real-time-vision-training
+   git clone https://github.com/kyegomez/RTViT
+   cd RTViT
    ```
 
 3. **Create a New Branch**:
