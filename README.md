@@ -1,5 +1,9 @@
-# RTViT
-Real-Time Training of a ViT Model
+# Real-Time Vision Model Training with Knowledge Distillation
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3.6%2B-blue.svg)](https://www.python.org/downloads/)
+[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg)](CONTRIBUTING.md)
+
 
 
 ```python
@@ -325,3 +329,192 @@ if __name__ == "__main__":
     main()
 
 ```
+
+
+
+## Overview
+
+This project provides a **real-time, continuously training vision model** that leverages advanced architectures like **Swin Transformer** and **ConvNeXt**. It utilizes **knowledge distillation** to enhance the training process, allowing the student model to learn from the teacher model in real time using your computer's camera feed. The code is designed with production-grade quality, featuring modular structure, extensive logging, error handling, and type annotations.
+
+## Features
+
+- **Real-Time Training**: Continuously trains the student model using live camera feed.
+- **Advanced Architectures**: Implements state-of-the-art models:
+  - **Student Model**: Swin Transformer Tiny (`swin_tiny_patch4_window7_224`)
+  - **Teacher Model**: ConvNeXt Large (`convnext_large`)
+- **Knowledge Distillation**: Enhances the student model's learning by leveraging the teacher model's predictions.
+- **Real-Time Visualization**:
+  - Overlays predicted class labels and loss values on the video feed.
+  - Displays real-time loss plot using `matplotlib`.
+- **Production-Grade Code**:
+  - Modular functions for clarity and maintainability.
+  - Extensive logging for tracking and debugging.
+  - Error handling to gracefully manage exceptions.
+  - Type annotations for improved code readability and reliability.
+- **Compatibility**:
+  - Runs on both CPU and GPU systems.
+  - Conditional use of CUDA and `torch.cuda.amp` for mixed-precision training when available.
+- **Customizable Classes**: Easily modify the set of classes the model predicts.
+
+## Benefits
+
+- **Immediate Feedback**: See the model's predictions and training progress in real time.
+- **Advanced Performance**: Utilizes cutting-edge models for superior accuracy and efficiency.
+- **Flexible and Extensible**: Customize models, classes, and parameters to suit your specific needs.
+- **Educational Value**: Ideal for learning about real-time machine learning, computer vision, and knowledge distillation.
+- **Open Source**: Encourages community collaboration and contributions.
+
+## Getting Started
+
+### Prerequisites
+
+- **Operating System**: Cross-platform (Windows, macOS, Linux)
+- **Python**: Version 3.6 or higher
+- **Hardware**:
+  - CPU-only systems are supported.
+  - A CUDA-capable GPU is recommended for optimal performance.
+
+### Installation
+
+1. **Clone the Repository**:
+
+   ```bash
+   git clone https://github.com/kyegomez/RTViT
+   cd real-time-vision-training
+   ```
+
+2. **Create a Virtual Environment** (Optional but recommended):
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
+
+3. **Install Required Packages**:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+   **Alternatively**, install packages individually:
+
+   ```bash
+   pip install torch torchvision timm opencv-python numpy matplotlib
+   ```
+
+### Usage
+
+1. **Run the Script**:
+
+   ```bash
+   python real_time_training.py
+   ```
+
+2. **Interact with the Application**:
+
+   - A window titled **"Real-Time Training"** will open, displaying the camera feed.
+   - The predicted class label and current loss value will be overlaid on the video feed.
+   - A real-time plot of the training loss will appear in a separate window.
+   - Press the **`q` key** to exit the application.
+
+## Customization
+
+### Adjusting Classes
+
+Modify the `class_names` list in the `main` function to include classes relevant to your environment:
+
+```python
+def main() -> None:
+    # Define your custom classes
+    class_names = ['person', 'chair', 'table', 'laptop', 'bottle', 'cup']
+    num_classes = len(class_names)
+    # Rest of the code...
+```
+
+### Changing Models
+
+You can replace the student and teacher models with other architectures supported by the `timm` library:
+
+- **Student Model**:
+
+  ```python
+  def load_student_model(num_classes: int) -> nn.Module:
+      model = timm.create_model('efficientnet_b0', pretrained=True, num_classes=num_classes)
+      # Rest of the code...
+  ```
+
+- **Teacher Model**:
+
+  ```python
+  def load_teacher_model(num_classes: int) -> nn.Module:
+      model = timm.create_model('resnet101', pretrained=True, num_classes=num_classes)
+      # Rest of the code...
+  ```
+
+### Performance Optimization
+
+- **Use Smaller Models**: If you experience performance issues, consider using smaller models like `swin_small_patch4_window7_224` or `mobilenetv3_small`.
+- **Reduce Number of Classes**: Limiting the number of classes can improve processing speed.
+- **Adjust Learning Rate**: Modify the `learning_rate` parameter in the `get_optimizer` function as needed.
+
+## Contributing
+
+We welcome contributions from the community to make this project better!
+
+### How to Contribute
+
+1. **Fork the Repository**:
+
+   Click the **Fork** button at the top-right corner of the repository page.
+
+2. **Clone Your Fork**:
+
+   ```bash
+   git clone https://github.com/your-username/real-time-vision-training.git
+   cd real-time-vision-training
+   ```
+
+3. **Create a New Branch**:
+
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+4. **Make Changes**:
+
+   - Add new features.
+   - Fix bugs.
+   - Improve documentation.
+
+5. **Commit Changes**:
+
+   ```bash
+   git commit -am 'Add some feature'
+   ```
+
+6. **Push to Your Fork**:
+
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+7. **Create a Pull Request**:
+
+   Go to the original repository and click on **New Pull Request**.
+
+### Guidelines
+
+- **Code Style**: Follow PEP 8 guidelines.
+- **Testing**: Ensure your code runs without errors.
+- **Documentation**: Update documentation to reflect changes.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Contact
+
+- **Project Maintainer**: [Kye Gomez](mailto:kye@swarms.world)
+- **GitHub Issues**: [Issue Tracker](https://github.com/your-username/real-time-vision-training/issues)
+
+*This project is inspired by the need for real-time machine learning applications and aims to provide a robust foundation for further development and research. Your contributions and feedback are highly appreciated!*
